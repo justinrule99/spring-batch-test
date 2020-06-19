@@ -5,22 +5,21 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.batch.item.ItemProcessor;
 
-public class PersonItemProcessor implements ItemProcessor<Person, Person> {
+public class PersonItemProcessor implements ItemProcessor<Account, Account> {
 
     private static final Logger log = LoggerFactory.getLogger(PersonItemProcessor.class);
 
-    // takes person, transforms into person
+    // takes acct, transforms into acct
 
     @Override
-    public Person process(final Person person) throws Exception {
-        final String firstName = person.getFirstName().toUpperCase();
-        final String lastName = person.getLastName().toUpperCase();
+    public Account process(final Account account) throws Exception {
+        final int accountNumber = account.getAccountNumber()+1;
 
-        final Person transformedPerson = new Person(firstName, lastName);
+        final Account transformedAccount = new Account(accountNumber);
 
-        log.info("Converting (" + person + ") into (" + transformedPerson + ")");
+        log.info("Converting (" + account + ") into (" + transformedAccount + ")");
 
-        return transformedPerson;
+        return transformedAccount;
     }
 
 }
